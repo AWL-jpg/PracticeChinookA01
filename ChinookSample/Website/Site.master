@@ -46,11 +46,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Linq to Entity queries</a>
+                    <a class="navbar-brand" runat="server" href="~/">Linq To Entity</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                   <%-- <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
+                    <ul class="nav navbar-nav">
+<%--                        <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>--%>
@@ -70,28 +70,40 @@
                             </ul>
                         </LoggedInTemplate>
                     </asp:LoginView>
-                     <%-- To create a workable drop down menu
-                        use a asp:Menu control and locate it
-                        here immediately after the asp:LoginView --%>
-                    <asp:Menu ID="navMenu" runat="server"
-                        BackColor="#000000" BorderColor="Red"
-                        StaticMenuItemStyle-ForeColor="#999999"
+                        <%-- upgraded menu navigation 
+                          New location for the drop down menu --%>
+                    <asp:Menu ID="NavMenu" runat="server"
+                         BackColor="#000000" BorderColor="Red"
+                         StaticMenuItemStyle-ForeColor="#999999"
                          StaticMenuItemStyle-VerticalPadding="10px"
                          StaticMenuItemStyle-HorizontalPadding="10px"
                          RenderingMode="List" Orientation="Horizontal"
                          DynamicMenuItemStyle-ForeColor="#999999"
                          DynamicMenuStyle-BackColor="Black">
                         <Items>
-                            <asp:MenuItem Text="Home" NavigateUrl="~/"></asp:MenuItem>
-                            <asp:MenuItem Text="Queries" Value="linq">
+                            <%-- a menuitem that self closes is a root item --%>
+                            <asp:MenuItem Text="Home" NavigateUrl="~/" />
+
+                            <%-- a drop down menu has nested menuitems --%>
+                            <asp:MenuItem Text="Queries" Value="query">
                                 <asp:MenuItem Text="First Sample" NavigateUrl="~/Queries/FirstSample" />
-                                 <asp:MenuItem Text="Rep Customers" NavigateUrl="~/Queries/RepresentitiveCustomers" />
+                               <asp:MenuItem Text="Customer of Rep" NavigateUrl="~/Queries/customerRep" />
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Users/Roles" NavigateUrl="~/Admin/Security/Default"></asp:MenuItem>
-                            <asp:MenuItem Text="About" NavigateUrl="~/About"></asp:MenuItem>
-                            <asp:MenuItem Text="Contact" NavigateUrl="~/Contact"></asp:MenuItem>
+
+                             <%-- a drop down menu has nested menuitems Business Processes--%>
+                            <asp:MenuItem Text="Bus/Process" Value="busprocess">
+                                <asp:MenuItem Text="Manage Playlists" NavigateUrl="~/BusinessProcesses/ManagePlayList" />
+                             
+                            </asp:MenuItem>
+                            <%-- a root menu item can also have an external
+                                closing tag but NO nested MenutItems --%>
+
+                            <asp:MenuItem Text="User Maintenance" NavigateUrl="~/Admin/Security/Default" />
+                            <asp:MenuItem Text="About" NavigateUrl="~/About" />
+                            <asp:MenuItem Text="Contact" NavigateUrl="~/Contact" />
                         </Items>
                     </asp:Menu>
+                        </ul>
                 </div>
             </div>
         </div>

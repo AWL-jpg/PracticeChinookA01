@@ -3,7 +3,7 @@ Griview setup
   <asp:GridView ID="UnregisteredUsersGridView" runat="server" 
                         AutoGenerateColumns="False" 
                         DataSourceID="UnregisteredUsersODS"
-                         DataKeyNames="Id"
+                         DataKeyNames="CustomerEmployeeId"
                          ItemType="ChinookSystem.Security.UnRegisteredUserProfile" OnSelectedIndexChanging="UnregisteredUsersGridView_SelectedIndexChanging">
                         <Columns>
                             <asp:CommandField SelectText="Register" ShowSelectButton="True"></asp:CommandField>
@@ -97,7 +97,7 @@ User Setup
                                  <div class="col-sm-5">
                                     <asp:TextBox ID="UserEmail" runat="server"
                                         text='<%# BindItem.Email %>' TextMode="Email" 
-                                        placeholder="User Name"></asp:TextBox>
+                                        placeholder="User Email"></asp:TextBox>
                                 </div>
                                 <div class="col-sm-5">
                                     <asp:CheckBoxList ID="RoleMemberships" runat="server"
@@ -107,7 +107,7 @@ User Setup
                         </InsertItemTemplate>
                     </asp:ListView>
                     <asp:ObjectDataSource ID="UserListViewODS" runat="server" 
-                        DataObjectTypeName="ChinookSystem.Security.RoleProfile" 
+                        DataObjectTypeName="ChinookSystem.Security.UserProfile" 
                         DeleteMethod="RemoveUser" 
                         InsertMethod="AddUser" 
                         SelectMethod="ListAllUsers"

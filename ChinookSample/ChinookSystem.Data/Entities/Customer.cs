@@ -29,6 +29,8 @@ namespace ChinookSystem.Data.Entities
 
         public virtual Employee Employee { get; set; }
 
+        public virtual ICollection<Playlist> PlayLists { get; set; }
+
     }
 }
 

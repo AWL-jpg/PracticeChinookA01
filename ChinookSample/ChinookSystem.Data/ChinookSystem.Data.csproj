@@ -51,13 +51,17 @@
     <Compile Include="Entities\InvoiceLine.cs" />
     <Compile Include="Entities\MediaType.cs" />
     <Compile Include="Entities\PlayList.cs" />
+    <Compile Include="Entities\PlaylistTrack.cs" />
     <Compile Include="Entities\Track.cs" />
     <Compile Include="POCOs\AlbumTrackSummary.cs" />
     <Compile Include="POCOs\ArtistAlbums.cs" />
     <Compile Include="POCOs\CustomerContact.cs" />
     <Compile Include="POCOs\EmployeeNameList.cs" />
+    <Compile Include="POCOs\ForeignKeyList.cs" />
     <Compile Include="POCOs\MediaTypeTrackCounts.cs" />
     <Compile Include="POCOs\RepresentitiveCustomers.cs" />
+    <Compile Include="POCOs\TracksForPlaylist.cs" />
+    <Compile Include="POCOs\TracksForPlaylistSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

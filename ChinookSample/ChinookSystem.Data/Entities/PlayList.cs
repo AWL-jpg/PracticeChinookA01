@@ -7,15 +7,20 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-#endregion 
-
+#endregion
 
 namespace ChinookSystem.Data.Entities
 {
-    public class PlayList
+    [Table("Playlists")]
+    public class Playlist
     {
+        public Playlist()
+        {
+            PlaylistTracks = new HashSet<PlaylistTrack>();  
+        }
         public int PlaylistId { get; set; }
         public string Name { get; set; }
+        public int? CustomerId { get; set; }
 
         //Tracks may be on one or more PlayList. Each PlayList has one or more Tracks
         //this many to many relationship was normalized using a table called PlaylistTracks
@@ -25,6 +30,7 @@ namespace ChinookSystem.Data.Entities
         //The navigation property set would be as  "children" 
 
         //Modeling of this relationship will be done in the context class
-        public virtual ICollection<Track> Tracks { get; set; }
+        public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }
