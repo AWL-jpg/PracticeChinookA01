@@ -15,7 +15,7 @@ namespace ChinookSystem.Security
         public string FirstName { get; set; } //Employee or Customer table
         public string LastName { get; set; } //Employee or Customer table
         public string Email { get; set; }   //AspNetUser
-        public string EmailConfirmed { get; set; } //AspNetUser
+        public bool EmailConfirmed { get; set; } //AspNetUser
         public IEnumerable<string> RoleMemberships { get; set; }
     }
 }

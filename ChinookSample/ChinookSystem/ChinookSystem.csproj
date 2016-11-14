@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,9 +58,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\AlbumController.cs" />
     <Compile Include="BLL\ArtistController.cs" />
     <Compile Include="BLL\CustomerController.cs" />
     <Compile Include="BLL\EmployeeController.cs" />
+    <Compile Include="BLL\GenreController.cs" />
+    <Compile Include="BLL\MediaTypeController.cs" />
+    <Compile Include="BLL\PlaylistController.cs" />
+    <Compile Include="BLL\PlaylistTrackController.cs" />
+    <Compile Include="BLL\TrackController.cs" />
     <Compile Include="DAL\ChinookContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ApplicationDbContext.cs" />
