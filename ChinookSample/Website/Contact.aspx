@@ -16,5 +16,8 @@
     </address>
 
     <p>this is the login for the webmaster: userid = Webmaster&nbsp;&nbsp;&nbsp;  password = Pa$$word1</p>
+     <p>this is the login for the customer: userid = LGoncalves&nbsp;&nbsp;&nbsp;  password = Pa$$word1</p>
+    <p>this is the login for the customer: userid = HHoly&nbsp;&nbsp;&nbsp;  password = Pa$$word1</p>
+    <p>this is the login for the employee: userid = AAdams&nbsp;&nbsp;&nbsp;  password = Pa$$word1</p>
     <h2>Remember to remove these lines BEFORE production</h2>
 </asp:Content>
