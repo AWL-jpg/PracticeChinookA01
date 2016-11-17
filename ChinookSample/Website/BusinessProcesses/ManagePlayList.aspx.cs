@@ -22,7 +22,25 @@ public partial class BusinessProcesses_ManagePlayList : System.Web.UI.Page
             TrackSearchList.DataSource = null;
         }
     }
+
    
+    protected override void Render(HtmlTextWriter writer)
+    { 
+        //this code sets up the ability to click anywhere on a row of a specified gridview :CurrentPlayList
+        foreach (GridViewRow r in CurrentPlayList.Rows)
+        {
+            if (r.RowType == DataControlRowType.DataRow)
+            {
+                r.Attributes["onmouseover"] = "this.style.cursor='pointer';this.style.textDecoration='underline';";
+                r.Attributes["onmouseout"] = "this.style.textDecoration='none';";
+                r.ToolTip = "Click to select row";
+                r.Attributes["onclick"] = this.Page.ClientScript.GetPostBackClientHyperlink(this.CurrentPlayList, "Select$" + r.RowIndex, true);
+
+            }
+        }
+
+        base.Render(writer);
+    }
 
     #region Search Fetch buttons
     protected void ArtistFetch_Click(object sender, EventArgs e)
@@ -47,7 +65,6 @@ public partial class BusinessProcesses_ManagePlayList : System.Web.UI.Page
         this code must be placed after the first binding of the data for the DataPager
         to exists.
 
-        http://www.aspsnippets.com/Articles/Selecting-GridView-Row-by-clicking-anywhere-on-the-Row.aspx
         */
         if (!TracksBy.Text.Equals("Artist"))
         {
@@ -245,10 +262,105 @@ public partial class BusinessProcesses_ManagePlayList : System.Web.UI.Page
                     List<TracksForPlaylist> results = sysmgr.Get_PlaylistTracks(PlayListName.Text, customerid);
                     CurrentPlayList.DataSource = results;
                     CurrentPlayList.DataBind();
+                    CurrentPlayList.SelectedIndex = -1;
                 }
             });
         }
     }
 
+    #endregion
+
+    #region Arrange or Remove Tracks
+    protected void MoveUp_Click(object sender, EventArgs e)
+    {
+        if (CurrentPlayList.Rows.Count == 0)
+        {
+            MessageUserControl.ShowInfo("You must have a playlist with entries before trying to rearrange the tracks.");
+        }
+        else
+        {
+            int selectedrowindex = CurrentPlayList.SelectedIndex;
+            if (selectedrowindex > -1)
+            {
+                if (selectedrowindex > 0)
+                {
+                    //MessageUserControl.ShowInfo("selected index is " + selectedrowindex.ToString() + " and can be moved");
+                    MoveTrack(selectedrowindex, "up");
+                }
+            }
+        }
+    }
+
+    protected void MoveDown_Click(object sender, EventArgs e)
+    {
+        if (CurrentPlayList.Rows.Count == 0)
+        {
+            MessageUserControl.ShowInfo("You must have a playlist with entries before trying to rearrange the tracks.");
+        }
+        else
+        {
+            int selectedrowindex = CurrentPlayList.SelectedIndex;
+            if (selectedrowindex > -1)
+            {
+                if (CurrentPlayList.Rows.Count > selectedrowindex + 1)
+                {
+                    //MessageUserControl.ShowInfo("selected index is " + selectedrowindex.ToString() + " and can be moved");
+                    MoveTrack(selectedrowindex, "down");
+                }
+            }
+        }
+    }
+
+    protected void MoveTrack(int selectedrowindex, string direction)
+    {
+        int customerid = GetUserCustomerId();
+        int trackid = int.Parse((CurrentPlayList.Rows[selectedrowindex].FindControl("TrackId") as Label).Text);
+        int tracknumber = int.Parse((CurrentPlayList.Rows[selectedrowindex].FindControl("TrackNumber") as Label).Text);
+        MessageUserControl.TryRun(() =>
+        {
+            PlaylistTrackController sysmgr = new PlaylistTrackController();
+            sysmgr.MoveTrack(PlayListName.Text, trackid, tracknumber, customerid, direction);
+            List<TracksForPlaylist> results = sysmgr.Get_PlaylistTracks(PlayListName.Text, customerid);
+            CurrentPlayList.DataSource = results;
+            if (direction.Equals("up"))
+            {
+                CurrentPlayList.SelectedIndex = selectedrowindex - 1;
+            }
+            else
+            {
+                CurrentPlayList.SelectedIndex = selectedrowindex + 1;
+            }
+            CurrentPlayList.DataBind();
+        });
+    }
+    protected void DeleteTrack_Click(object sender, EventArgs e)
+    {
+        if (CurrentPlayList.Rows.Count == 0)
+        {
+            MessageUserControl.ShowInfo("You must have a playlist with entries before trying to remove the track.");
+        }
+        else
+        {
+            int selectedrowindex = CurrentPlayList.SelectedIndex;
+
+            if (selectedrowindex > -1)
+            {
+                int customerid = GetUserCustomerId();
+                int trackid = int.Parse((CurrentPlayList.Rows[selectedrowindex].FindControl("TrackId") as Label).Text);
+                int tracknumber = int.Parse((CurrentPlayList.Rows[selectedrowindex].FindControl("TrackNumber") as Label).Text);
+                //MessageUserControl.ShowInfo("track is >" + (CurrentPlayList.Rows[selectedrowindex].FindControl("TrackId") as Label).Text + "<");
+                MessageUserControl.TryRun(() =>
+                {
+                    PlaylistTrackController sysmgr = new PlaylistTrackController();
+                    sysmgr.RemovePlaylistTrack(PlayListName.Text, trackid, tracknumber, customerid);
+                    List<TracksForPlaylist> results = sysmgr.Get_PlaylistTracks(PlayListName.Text, customerid);
+                    CurrentPlayList.DataSource = results;
+                    CurrentPlayList.SelectedIndex = -1;
+                    CurrentPlayList.DataBind();
+                });
+            }
+
+        }
+    }
     #endregion
 }
