@@ -65,7 +65,6 @@ public partial class BusinessProcesses_ManagePlayList : System.Web.UI.Page
         this code must be placed after the first binding of the data for the DataPager
         to exists.
 
-        http://www.aspsnippets.com/Articles/Selecting-GridView-Row-by-clicking-anywhere-on-the-Row.aspx
         */
         if (!TracksBy.Text.Equals("Artist"))
         {
