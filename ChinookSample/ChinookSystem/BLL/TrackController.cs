@@ -110,6 +110,7 @@ namespace ChinookSystem.BLL
         }
         #endregion
         #region Business Processes
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<TracksForPlaylistSelection> Get_TracksForPlaylistSelection(int id, string fetchby)
         {
             List<TracksForPlaylistSelection> results = null;
