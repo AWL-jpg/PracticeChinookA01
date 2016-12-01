@@ -99,12 +99,12 @@ namespace ChinookSystem.BLL
                     {
                         throw new Exception("Playlist already has requested track.");
                     }
-                    //for testing
-                    //if (playlistname.Equals("Boom"))
-                    //{
-                    //    throw new Exception("Playlist test rollback.");
-                    //}
-                    newtrack = new PlaylistTrack();
+                //for testing
+                //    if (playlistname.Equals("Boom"))
+                //    {
+                //        throw new Exception("Playlist test rollback.");
+                //    }
+                newtrack = new PlaylistTrack();
                     //newtrack.PlaylistId = existing.PlaylistId;
                     newtrack.TrackId = trackid;
                     newtrack.TrackNumber = tracknumber;

@@ -99,7 +99,8 @@
                                 closing tag but NO nested MenutItems --%>
 
                             <asp:MenuItem Text="User Maintenance" NavigateUrl="~/Admin/Security/Default" />
-                            <asp:MenuItem Text="About" NavigateUrl="~/About" />
+                             <asp:MenuItem Text="Entity Maintenance" NavigateUrl="~/Admin/EntityMaintenance/TrackCRUD" />
+                             <asp:MenuItem Text="About" NavigateUrl="~/About" />
                             <asp:MenuItem Text="Contact" NavigateUrl="~/Contact" />
                         </Items>
                     </asp:Menu>
